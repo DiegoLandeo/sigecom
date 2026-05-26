@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>SIGECOM | Reportes</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold" href="/">SIGECOM</a>
+
+    <div class="navbar-nav ms-auto align-items-center">
+      <a class="nav-link" href="/"><i class="bi bi-house-door me-1"></i> Inicio</a>
+      <a class="nav-link" href="/computadoras"><i class="bi bi-pc-display me-1"></i> Computadoras</a>
+      <a class="nav-link" href="/responsables"><i class="bi bi-person-badge me-1"></i> Responsables</a>
+      <a class="nav-link active" href="/reportes"><i class="bi bi-bar-chart-line me-1"></i> Reportes</a>
+
+      <form th:action="@{/logout}" method="post" class="d-inline">
+        <button type="submit" class="nav-link border-0 bg-transparent text-light">
+          <i class="bi bi-box-arrow-right me-1"></i> Salir
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<main class="app-main">
+
+  <section class="module-hero">
+    <div class="row align-items-center g-3">
+      <div class="col-lg-8">
+        <span class="badge bg-light text-primary mb-3">Módulo de análisis</span>
+
+        <h1 class="fw-bold mb-2">Reportes</h1>
+
+        <p class="mb-0">
+          Consulta indicadores técnicos y administrativos para analizar el estado de las computadoras,
+          el acceso a internet, la capacidad de almacenamiento y los horarios de navegación.
+        </p>
+      </div>
+
+      <div class="col-lg-4 text-lg-end">
+        <a href="/computadoras" class="btn btn-light">
+          <i class="bi bi-pc-display me-1"></i> Ver computadoras
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="row g-4">
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card module-card">
+        <div class="card-body">
+          <div class="module-icon">
+            <i class="bi bi-hdd"></i>
+          </div>
+
+          <h5 class="fw-bold">Almacenamiento por local</h5>
+
+          <p class="text-muted">
+            Muestra la capacidad total de almacenamiento agrupada por laboratorio, aula u oficina.
+          </p>
+
+          <a href="/computadoras/reporte-almacenamiento" class="btn btn-outline-primary w-100">
+            <i class="bi bi-eye me-1"></i> Ver reporte
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card module-card">
+        <div class="card-body">
+          <div class="module-icon">
+            <i class="bi bi-percent"></i>
+          </div>
+
+          <h5 class="fw-bold">Docentes con internet</h5>
+
+          <p class="text-muted">
+            Calcula el porcentaje de computadoras de ambientes docentes con acceso a internet.
+          </p>
+
+          <a href="/computadoras/reporte-docentes-internet" class="btn btn-outline-primary w-100">
+            <i class="bi bi-eye me-1"></i> Ver reporte
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card module-card">
+        <div class="card-body">
+          <div class="module-icon">
+            <i class="bi bi-clock-history"></i>
+          </div>
+
+          <h5 class="fw-bold">Consulta por horario</h5>
+
+          <p class="text-muted">
+            Identifica computadoras con internet dentro de un horario de navegación determinado.
+          </p>
+
+          <a href="/computadoras/reporte-horario" class="btn btn-outline-primary w-100">
+            <i class="bi bi-eye me-1"></i> Ver reporte
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card module-card">
+        <div class="card-body">
+          <div class="module-icon">
+            <i class="bi bi-person-check"></i>
+          </div>
+
+          <h5 class="fw-bold">Docentes por responsable</h5>
+
+          <p class="text-muted">
+            Lista computadoras docentes con internet asignadas a un responsable determinado.
+          </p>
+
+          <a href="/computadoras/reporte-docentes-responsable" class="btn btn-outline-primary w-100">
+            <i class="bi bi-eye me-1"></i> Ver reporte
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="card module-card">
+        <div class="card-body">
+          <div class="module-icon">
+            <i class="bi bi-clock-history"></i>
+          </div>
+
+          <h5 class="fw-bold">Sin detección reciente</h5>
+
+          <p class="text-muted">
+            Identifica equipos que no han reportado datos técnicos mediante el agente PowerShell.
+          </p>
+
+          <a href="/computadoras/reporte-sin-deteccion" class="btn btn-outline-primary w-100">
+            <i class="bi bi-eye me-1"></i> Ver reporte
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="card quick-panel mt-4">
+    <div class="card-header bg-white">
+      <strong>
+        <i class="bi bi-info-circle me-1"></i> Uso de los reportes
+      </strong>
+    </div>
+
+    <div class="card-body">
+      <p class="text-muted mb-0">
+        Los reportes permiten apoyar la toma de decisiones sobre infraestructura tecnológica de la facultad.
+        La información se obtiene a partir de los registros de computadoras, responsables, acceso a internet,
+        almacenamiento y horarios de navegación.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
