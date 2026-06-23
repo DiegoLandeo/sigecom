@@ -1,4 +1,4 @@
-name: SIGECOM CI/CD
+name: SIGECOM CI
 
 on:
   push:
