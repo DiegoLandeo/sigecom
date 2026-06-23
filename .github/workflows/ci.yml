@@ -51,7 +51,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Construir imagen Docker
-        run: docker build -t ghcr.io/${{ github.repository_owner }}/sigekom-app:latest .
+        run: docker build -t ghcr.io/diegolandeo/sigekom-app:latest .
 
       - name: Publicar imagen Docker
-        run: docker push ghcr.io/${{ github.repository_owner }}/sigekom-app:latest
+        run: docker push ghcr.io/diegolandeo/sigekom-app:latest
