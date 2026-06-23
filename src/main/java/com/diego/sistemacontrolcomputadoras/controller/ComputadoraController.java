@@ -12,8 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.dao.DataIntegrityViolationException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -283,9 +281,7 @@ public class ComputadoraController {
     @GetMapping("/reporte-sin-deteccion")
     public String reporteSinDeteccion(Model model) {
 
-        LocalDateTime fechaLimite = LocalDateTime.now().minusDays(7);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String fechaLimiteTexto = fechaLimite.format(formatter);
+        String fechaLimiteTexto = computadoraService.obtenerFechaLimiteSinDeteccion();
 
         List<Computadora> computadorasSinDeteccion = new ArrayList<>();
         computadorasSinDeteccion.addAll(computadoraRepository.findByUltimaDeteccionLessThan(fechaLimiteTexto));
