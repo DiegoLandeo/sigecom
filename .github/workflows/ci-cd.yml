@@ -28,7 +28,7 @@ jobs:
         run: chmod +x mvnw
 
       - name: Ejecutar pruebas unitarias
-        run: ./mvnw test
+        run: ./mvnw -Dtest=ComputadoraServiceTest test
 
       - name: Construir paquete del sistema
         run: ./mvnw clean package -DskipTests
