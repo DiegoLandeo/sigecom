@@ -103,7 +103,10 @@
 
                         <div class="system-status-item">
                             <span class="text-muted">Memoria RAM</span>
-                            <span class="fw-semibold" th:text="${computadora.ram}"></span>
+                            <span>
+                                <span class="fw-semibold" th:text="${computadora.ram}"></span>
+                                <span class="badge bg-primary">GB</span>
+                            </span>
                         </div>
 
                         <div class="system-status-item">

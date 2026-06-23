@@ -19,7 +19,7 @@ $procesador = (Get-CimInstance Win32_Processor |
 
 $ramBytes = (Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory
 $ramGB = [math]::Round($ramBytes / 1GB, 0)
-$ram = "$ramGB GB"
+$ram = "$ramGB"
 
 $disco = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='C:'"
 $discoTotalGB = [math]::Round($disco.Size / 1GB, 0)
