@@ -1,5 +1,5 @@
 # Instalador del agente SIGECOM
-# Crea la carpeta local y programa la ejecución automática del agente
+# Crea la carpeta local, programa la ejecución automática y ejecuta el agente una vez
 
 $carpetaDestino = "C:\SIGECOM"
 $scriptOrigen = ".\agente-computadora.ps1"
@@ -44,3 +44,13 @@ Register-ScheduledTask `
 Write-Host "Tarea programada creada correctamente:"
 Write-Host $nombreTarea
 Write-Host "El agente se ejecutará automáticamente cada 30 minutos."
+
+Write-Host "Ejecutando agente por primera vez para pre-registrar la computadora..."
+
+try {
+    powershell.exe -ExecutionPolicy Bypass -File $scriptDestino
+    Write-Host "Primera sincronización ejecutada correctamente."
+} catch {
+    Write-Host "No se pudo ejecutar la primera sincronización."
+    Write-Host $_.Exception.Message
+}
