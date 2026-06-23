@@ -128,10 +128,7 @@
 
               <div class="col-md-12">
                 <label class="form-label">Última detección</label>
-                <input type="text"
-                       class="form-control"
-                       th:value="${computadora.ultimaDeteccion != null ? computadora.ultimaDeteccion : 'Sin detección registrada'}"
-                       readonly>
+                <input type="text" th:field="*{ultimaDeteccion}" class="form-control" th:readonly="${computadora.id != null}">
               </div>
 
             </div>

@@ -33,24 +33,32 @@ $configuracion = New-ScheduledTaskSettingsSet `
     -DontStopIfGoingOnBatteries `
     -StartWhenAvailable
 
-Register-ScheduledTask `
-    -TaskName $nombreTarea `
-    -Action $accion `
-    -Trigger $disparador `
-    -Settings $configuracion `
-    -Description "Agente SIGECOM para sincronizar datos técnicos del equipo cada 30 minutos." `
-    -Force
+try {
+    Register-ScheduledTask `
+        -TaskName $nombreTarea `
+        -Action $accion `
+        -Trigger $disparador `
+        -Settings $configuracion `
+        -Description "Agente SIGECOM para sincronizar datos técnicos del equipo cada 30 minutos." `
+        -Force `
+        -ErrorAction Stop
 
-Write-Host "Tarea programada creada correctamente:"
-Write-Host $nombreTarea
-Write-Host "El agente se ejecutará automáticamente cada 30 minutos."
+    Write-Host "Tarea programada creada correctamente:"
+    Write-Host $nombreTarea
+    Write-Host "El agente se ejecutará automáticamente cada 30 minutos."
+}
+catch {
+    Write-Host "ERROR: No se pudo crear la tarea programada."
+    Write-Host $_.Exception.Message
+}
 
 Write-Host "Ejecutando agente por primera vez para pre-registrar la computadora..."
 
 try {
     powershell.exe -ExecutionPolicy Bypass -File $scriptDestino
     Write-Host "Primera sincronización ejecutada correctamente."
-} catch {
+}
+catch {
     Write-Host "No se pudo ejecutar la primera sincronización."
     Write-Host $_.Exception.Message
 }
