@@ -1,17 +1,21 @@
-name: SIGECOM CI
+name: SIGECOM CI/CD
 
 on:
   push:
     branches:
-      - master
       - main
+      - master
   pull_request:
     branches:
-      - master
       - main
+      - master
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
-  build-test-package:
+  build-test-docker:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,11 +34,24 @@ jobs:
       - name: Ejecutar pruebas unitarias
         run: ./mvnw -Dtest=ComputadoraServiceTest test
 
-      - name: Construir paquete del sistema
+      - name: Construir paquete JAR
         run: ./mvnw clean package -DskipTests
 
-      - name: Publicar artefacto generado
+      - name: Publicar artefacto JAR
         uses: actions/upload-artifact@v4
         with:
           name: sigekom-jar
           path: target/*.jar
+
+      - name: Iniciar sesión en GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Construir imagen Docker
+        run: docker build -t ghcr.io/${{ github.repository_owner }}/sigekom-app:latest .
+
+      - name: Publicar imagen Docker
+        run: docker push ghcr.io/${{ github.repository_owner }}/sigekom-app:latest
